@@ -15,11 +15,19 @@ connectDB();
 const app = express();
 
 // Middleware
-app.use(cors());
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.use(cors({
+    origin: [
+        "http://localhost:5173",
+        "https://task-tracker-grsc.vercel.app"
+    ],
+    credentials: true
+}));
 // Health Check Route
+
 app.get("/", (req, res) => {
   res.status(200).json({
     success: true,
